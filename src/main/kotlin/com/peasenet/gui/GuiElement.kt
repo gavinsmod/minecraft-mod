@@ -146,14 +146,7 @@ open class GuiElement(title: Text?) : Screen(title) {
         for (g in guis) {
             g.render(drawContext, textRenderer, mouseX, mouseY, delta)
         }
-//        
-//        super.render(drawContext, mouseX, mouseY, delta)
-//        assert(client != null)
         val tr = client!!.textRenderer
-////        RenderSystem.setShader { GameRenderer.getPositionProgram() }
-////        RenderSystem.enableBlend()
-//        RenderSystem.setShader(GameRenderer::getPositionProgram);
-//        guis.forEach(Consumer { gui: Gui -> gui.render(drawContext, tr, mouseX, mouseY, delta) })
         if (titleBox != null) {
             titleBox!!.setBackground(GavUISettings.getColor("gui.color.background"))
             titleBox!!.render(drawContext, tr, mouseX, mouseY, delta)
