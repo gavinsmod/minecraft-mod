@@ -23,6 +23,7 @@
  */
 package com.peasenet.mods.render
 
+import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.EntityNameRender
 import com.peasenet.util.listeners.EntityRenderNameListener
 import net.minecraft.client.MinecraftClient
@@ -74,12 +75,11 @@ class ModHealthTag : RenderMod(
                 ?: return
         val i = if ("deadmau5" == text.string) -10 else 0
         matrices.push()
-        matrices.translate(attachmentVec.x, attachmentVec.y + 0.5, attachmentVec.z)
+        matrices.translate(-attachmentVec.x, attachmentVec.y + 0.5, -attachmentVec.z)
         matrices.multiply(dispatcher.rotation)
         matrices.scale(0.025f, -0.025f, 0.025f)
         val matrix4f = matrices.peek().positionMatrix
         val f = MinecraftClient.getInstance().options.getTextBackgroundColor(0.25f)
-
         val renderer: TextRenderer = MinecraftClient.getInstance().textRenderer
         val g = -renderer.getWidth(text) / 2.0f
         renderer.draw(
@@ -112,7 +112,7 @@ class ModHealthTag : RenderMod(
     private fun addHealth(entity: LivingEntity, tag: Text): MutableText {
         val currentHp = entity.health.toInt()
         val formattedMutableText = Text.literal(" ").append(currentHp.toString()).append(" HP")
-        return (tag as MutableText).append(formattedMutableText.formatted(getColor(entity)))
+        return (formattedMutableText.formatted(getColor(entity)))
     }
 
     private fun getColor(entity: LivingEntity): Formatting {
