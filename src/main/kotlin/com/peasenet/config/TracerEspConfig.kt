@@ -174,8 +174,7 @@ open class TracerEspConfig<E> : Config<TracerEspConfig<E>>() {
      * @param spawnEggItem The mob to remove (SpawnEggItem)
      */
     fun removeMob(spawnEggItem: SpawnEggItem) {
-        var registryManager = GavinsModClient.minecraftClient.getWorld().registryManager;
-        removeMob(spawnEggItem.getEntityType(registryManager, spawnEggItem.defaultStack))
+        removeMob(spawnEggItem.getEntityType(spawnEggItem.defaultStack))
     }
 
     /**
@@ -183,8 +182,7 @@ open class TracerEspConfig<E> : Config<TracerEspConfig<E>>() {
      * @param spawnEggItem The mob to add (SpawnEggItem)
      */
     fun addMob(spawnEggItem: SpawnEggItem) {
-        val registryManager = GavinsModClient.minecraftClient.getWorld().registryManager;
-        addMob(spawnEggItem.getEntityType(registryManager, spawnEggItem.defaultStack))
+        addMob(spawnEggItem.getEntityType(spawnEggItem.defaultStack))
     }
 
     /**
@@ -202,9 +200,7 @@ open class TracerEspConfig<E> : Config<TracerEspConfig<E>>() {
      * @return Whether the mob is shown.
      */
     fun mobIsShown(egg: SpawnEggItem): Boolean {
-
-        val registryManager = GavinsModClient.minecraftClient.getWorld().registryManager;
-        return mobIsShown(egg.getEntityType(registryManager, egg.defaultStack))
+        return mobIsShown(egg.getEntityType(egg.defaultStack))
     }
 
 
