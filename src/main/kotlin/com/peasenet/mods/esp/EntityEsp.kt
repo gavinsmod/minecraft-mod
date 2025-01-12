@@ -27,7 +27,6 @@ package com.peasenet.mods.esp
 import com.peasenet.gavui.color.Color
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.RenderUtils.applyRegionalRenderOffset
-import net.minecraft.client.gl.GlUsage
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
@@ -53,7 +52,7 @@ abstract class EntityEsp<T : Entity>(
 
     private lateinit var vertexBuffer: VertexBuffer
     override fun onEnable() {
-        vertexBuffer = VertexBuffer(GlUsage.STATIC_WRITE)
+        vertexBuffer = VertexBuffer(VertexBuffer.Usage.STATIC)
         val bb = Box(-1.0, 0.0, -1.0, 1.0, 1.0, 1.0)
         RenderUtils.drawOutlinedBox(bb, vertexBuffer)
         super.onEnable()
