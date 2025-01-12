@@ -30,16 +30,12 @@ import com.peasenet.gavui.color.Color
 import com.peasenet.gavui.color.Colors
 import com.peasenet.main.GavinsModClient
 import com.peasenet.mixinterface.ISimpleOption
-import com.peasenet.mods.esp.EspMod.Companion.config
 import com.peasenet.util.math.MathUtils
 import net.minecraft.client.MinecraftClient
-import net.minecraft.client.gl.ShaderProgramKeys
 import net.minecraft.client.gl.VertexBuffer
 import net.minecraft.client.render.*
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.component.DataComponentTypes
 import net.minecraft.entity.Entity
-import net.minecraft.entity.ItemEntity
 import net.minecraft.util.math.*
 import net.minecraft.world.chunk.Chunk
 import org.joml.Matrix4f
@@ -68,7 +64,7 @@ object RenderUtils {
      * Resets the render system to the default state.
      */
     fun resetRenderSystem() {
-//        RenderSystem.applyModelViewMatrix()
+        RenderSystem.applyModelViewMatrix()
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
         RenderSystem.disableBlend()
         GL11.glDisable(GL11.GL_LINE_SMOOTH)
@@ -193,7 +189,7 @@ object RenderUtils {
     fun drawOutlinedBox(box: Box, matrixStack: MatrixStack) {
         val matrix = matrixStack.peek().positionMatrix
         val tessellator = RenderSystem.renderThreadTesselator()
-        RenderSystem.setShader(ShaderProgramKeys.POSITION)
+        RenderSystem.setShader(GameRenderer::getPositionProgram)
         val bufferBuilder = tessellator
             .begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION)
 
@@ -631,9 +627,9 @@ object RenderUtils {
      */
     fun setupRenderWithShader(matrixStack: MatrixStack) {
         setupRender(matrixStack)
-        RenderSystem.setShader(ShaderProgramKeys.POSITION_COLOR)
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram)
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f)
-//        RenderSystem.applyModelViewMatrix()
+        RenderSystem.applyModelViewMatrix()
     }
 
     /**
