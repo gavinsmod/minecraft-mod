@@ -146,6 +146,7 @@ public class Gui {
         setHoverable(builder.isHoverable());
         setTransparency(builder.getTransparency());
         setDrawBorder(builder.getDrawBorder());
+        setParent(builder.isParent());
     }
 
     public static Gui getClickedGui() {
