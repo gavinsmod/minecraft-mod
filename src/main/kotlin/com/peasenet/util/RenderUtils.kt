@@ -26,9 +26,11 @@
 package com.peasenet.util
 
 import com.mojang.blaze3d.systems.RenderSystem
+import com.peasenet.config.EspConfig
 import com.peasenet.gavui.color.Color
 import com.peasenet.gavui.color.Colors
 import com.peasenet.main.GavinsModClient
+import com.peasenet.main.Settings
 import com.peasenet.mixinterface.ISimpleOption
 import com.peasenet.util.math.MathUtils
 import net.minecraft.client.MinecraftClient
@@ -693,7 +695,8 @@ object RenderUtils {
         e: Entity,
         color: Color,
         alpha: Float,
-        region: RegionPos
+        region: RegionPos,
+        config: EspConfig = Settings.getConfig("esp")
     ) {
         matrixStack.push()
         RenderSystem.setShaderColor(color.red, color.green, color.blue, alpha)
@@ -702,9 +705,7 @@ object RenderUtils {
         matrixStack.translate(
             e.x + lerped.x, e.y + lerped.y, e.z + lerped.z
         );
-        /* NOTE: This is something cool...
-            matrixStack.scale(1 / 0.25f, 1 / 0.25f, 1 / 0.25f)
-         */
+        matrixStack.scale(config.espSize / 0.25f, config.espSize / 0.25f, config.espSize / 0.25f)
         var bb = e.boundingBox.offset(-e.x, -e.y, -e.z)
         drawOutlinedBox(bb, matrixStack)
 
